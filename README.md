@@ -1,20 +1,16 @@
 # ClintEastwood
 
-The **C**loudspace **Lint**er for rails applications
+The **C** loudspace **Lint** er for rails applications
 
 ## Installation
 
 Add this line to your application's Gemfile:
 
-    gem 'clint_eastwood'
+    gem 'clint_eastwood', :git => 'git://github.com/cloudspace/clint_eastwood.git'
 
 And then execute:
 
     $ bundle
-
-Or install it yourself as:
-
-    $ gem install clint_eastwood
 
 ## Usage
 
