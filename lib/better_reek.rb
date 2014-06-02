@@ -1,5 +1,4 @@
 require 'reek/cli/application'
-require 'pry'
 
 # Ignores log and WorkerError::log commands in the reek line count
 class Reek::Core::CodeParser
