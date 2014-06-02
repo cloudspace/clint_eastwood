@@ -1,0 +1,16 @@
+EmptyLinesAroundBody:
+  Enabled: false
+
+LineLength:
+  Max: 120
+
+ClassLength:
+  Enabled: true
+  CountComments: false
+  Max: 150
+
+MethodLength:
+  Enabled: false
+
+WhileUntilModifier:
+  Enabled: false
