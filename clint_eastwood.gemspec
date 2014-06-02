@@ -28,5 +28,5 @@ Gem::Specification.new do |spec|
   spec.add_development_dependency 'rubocop', '~> 0.23.0'
   spec.add_development_dependency 'rails_best_practices', '~> 1.15.4'
 
-  spec.executables << 'clint'
+  spec.executables = ['clint']
 end
