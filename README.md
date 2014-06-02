@@ -1,6 +1,6 @@
 # ClintEastwood
 
-TODO: Write a gem description
+The **C**loudspace **Lint**er for rails applications
 
 ## Installation
 
@@ -18,7 +18,9 @@ Or install it yourself as:
 
 ## Usage
 
-TODO: Write usage instructions here
+To run simply call 'clint' while in the desired rails app root directory.  You can also specify a path as such:
+
+    clint ../rss.cloudspace.com
 
 ## Contributing
 
