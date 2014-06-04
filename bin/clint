@@ -1,7 +1,6 @@
 #!/usr/bin/env ruby
 
 require 'clint_eastwood'
-require 'pry'
 require 'rubygems'
 require 'reek/cli/application'
 require_relative '../lib/better_reek.rb'
