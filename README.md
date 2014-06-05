@@ -40,6 +40,14 @@ The following options are availabe to disable the individual linter modules
 --disable-rbp
 ```
 
+#### warn only
+Runs clint but still exists successfully, only printing the output
+
+```
+clint --warn
+```
+
+
 ## Contributing
 
 1. Fork it ( https://github.com/[my-github-username]/clint_eastwood/fork )
