@@ -23,6 +23,7 @@ Gem::Specification.new do |spec|
   
   spec.add_dependency 'reek', '~> 1.3.7'
   spec.add_dependency 'rubocop', '~> 0.23.0'
+  spec.add_dependency 'thor', '~> 0.19.1'
   spec.add_dependency 'rails_best_practices', '~> 1.15.4'
 
   spec.executables = ['clint']
