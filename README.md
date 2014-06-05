@@ -14,9 +14,31 @@ And then execute:
 
 ## Usage
 
-To run simply call 'clint' while in the desired rails app root directory.  You can also specify a path as such:
+To run simply call 'clint' while in the desired rails app root directory.
 
-    clint ../rss.cloudspace.com
+## options
+  #### path
+  Allows to to specify a project path other than the current directory
+
+  ```
+  clint --path /path/to/my/project
+  ```
+
+  #### lint
+  Allows you to specify which subdirectories to lint (default is `app`, `lib`, `config`, `spec`)
+  
+  ```
+  clint --lint app lib bin
+  ```
+
+  #### Disable modules
+  The following options are availabe to disable the individual linter modules
+
+  ```
+  --disable-reek
+  --disable-rubocop
+  --disable-rbp
+  ```
 
 ## Contributing
 

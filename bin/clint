@@ -3,15 +3,3 @@
 require 'clint_eastwood/cli'
 
 ClintEastwood::CLI.start(ARGV)
-
-
-
-
-
-
-
-
-
-
-
-

@@ -1,72 +1,65 @@
-require "clint_eastwood/version"
+require 'clint_eastwood/version'
 require_relative 'better_reek.rb'
+require 'pry'
 
+# Clint Eastwood
 module ClintEastwood
+
+  # Lint enforcer
   class TheEnforcer
     @result = true
 
-    def initialize(path)
+    def initialize(path, lint: nil, disable_reek: false, disable_rubocop: false, disable_rbp: false)
       gem_path = File.expand_path(File.dirname(__FILE__))
-      config_path = File.join(gem_path, '../config')
+      @config_path = File.join(gem_path, '../config')
 
-      @user_rubocop_config = File.join(path, 'config/rubocop.yml')
-      @user_reek_config = File.join(path, 'config/reek.yml')
-      @default_rubocop_config = File.join(config_path, 'rubocop.yml')
-      @default_reek_config = File.join(config_path, 'reek.yml')
+      @disable_rubocop = disable_rubocop
+      @disable_reek = disable_reek
+      @disable_rbp = disable_rbp
 
-      @lint_path = path
-      @rubocop_config = File.exist?(@user_rubocop_config) ? @user_rubocop_config : @default_rubocop_config
-      @reek_config = File.exist?(@user_reek_config) ? @user_reek_config : @default_reek_config
+      @base_path = path
+      @lint_paths = lint || %w(app lib config spec)
     end
 
     def enforce
-      reek_result = reek
-      rubocop_result = rubocop
-      rbp_result = rails_best_practices
+      reek_result = @disable_reek || reek
+      rubocop_result = @disable_rubocop || rubocop
+      rbp_result = @disable_rbp || rails_best_practices
 
       reek_result && rubocop_result && rbp_result
     end
 
-    def reek
-      puts
-      puts '----------------------------------------------------------------'
-      puts '----------------------------------------------------------------'
-      puts 'Running reek'
-      puts 
-      puts "Using config: #{@reek_config}" if @user_reek_config == @reek_config
-      puts "Using default config" if @default_reek_config == @reek_config
-      puts '----------------------------------------------------------------'
-      puts '----------------------------------------------------------------'
-      puts
+    def locate_config(filename)
+      @user_config = File.join(@base_path, 'config', filename)
+      @default_config = File.join(@config_path, filename)
 
-      Reek::Cli::Application.new(["#{@lint_path}/app", "#{@lint_path}/lib", "#{@lint_path}/config", "#{@lint_path}/spec", '--config', "#{@reek_config}"]).execute()
+      File.exist?(@user_config) ? @user_config : @default_config
+    end
+
+    def reek
+      @reek_config = locate_config('reek.yml')
+
+      reek_command = []
+
+      @lint_paths.each do |path|
+        reek_command << File.join(@base_path, path)
+      end
+
+      reek_command.concat ['--config', "#{@reek_config}"]
+
+      # Reek returns the number of errors, so make sure it's zero
+      Reek::Cli::Application.new(reek_command).execute == 0
     end
 
     def rubocop
-      puts
-      puts '----------------------------------------------------------------'
-      puts '----------------------------------------------------------------'
-      puts 'Running rubocop'
-      puts 
-      puts "Using config: #{@rubocop_config}" if @user_rubocop_config == @rubocop_config
-      puts "Using default config" if @default_rubocop_config == @rubocop_config
+      @rubocop_config = locate_config('rubocop.yml')
 
-      puts '----------------------------------------------------------------'
-      puts '----------------------------------------------------------------'
-      puts
+      paths = @lint_paths.map { |p| File.join(@base_path, p) }.join(' ')
 
-      system "bundle exec rubocop --rails --config #{@rubocop_config} #{@lint_path}/app #{@lint_path}/lib #{@lint_path}/config #{@lint_path}/spec"
+      system "bundle exec rubocop --rails --config #{@rubocop_config} #{paths}"
     end
 
     def rails_best_practices
-      puts
-      puts '----------------------------------------------------------------'
-      puts '----------------------------------------------------------------'
-      puts 'Running rails_best_practices'
-      puts '----------------------------------------------------------------'
-      puts '----------------------------------------------------------------'
-      puts
-
       system 'bundle exec rails_best_practices #{@lint_directory}'
     end
   end

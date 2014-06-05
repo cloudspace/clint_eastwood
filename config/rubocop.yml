@@ -14,3 +14,6 @@ MethodLength:
 
 WhileUntilModifier:
   Enabled: false
+
+ClassAndModuleChildren:
+  Enabled: false
