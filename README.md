@@ -14,7 +14,7 @@ And then execute:
 
 ## Usage
 
-To run simply call 'clint' while in the desired rails app root directory.
+To run simply run `clint` while in the desired app root directory.
 
 ## options
 #### path
