@@ -17,14 +17,14 @@ And then execute:
 To run simply run `clint` while in the desired app root directory.
 
 ## options
-#### path
+#### Path
 Allows to to specify a project path other than the current directory
 
 ```
 clint --path /path/to/my/project
 ```
 
-#### lint
+#### Lint
 Allows you to specify which subdirectories to lint (default is `app`, `lib`, `config`, `spec`)
 
 ```
@@ -40,7 +40,7 @@ The following options are availabe to disable the individual linter modules
 --disable-rbp
 ```
 
-#### warn only
+#### Warn only
 Runs clint but still exists successfully, only printing the output
 
 ```
