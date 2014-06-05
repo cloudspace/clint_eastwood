@@ -17,28 +17,28 @@ And then execute:
 To run simply call 'clint' while in the desired rails app root directory.
 
 ## options
-  #### path
-  Allows to to specify a project path other than the current directory
+#### path
+Allows to to specify a project path other than the current directory
 
-  ```
-  clint --path /path/to/my/project
-  ```
+```
+clint --path /path/to/my/project
+```
 
-  #### lint
-  Allows you to specify which subdirectories to lint (default is `app`, `lib`, `config`, `spec`)
-  
-  ```
-  clint --lint app lib bin
-  ```
+#### lint
+Allows you to specify which subdirectories to lint (default is `app`, `lib`, `config`, `spec`)
 
-  #### Disable modules
-  The following options are availabe to disable the individual linter modules
+```
+clint --lint app lib bin
+```
 
-  ```
-  --disable-reek
-  --disable-rubocop
-  --disable-rbp
-  ```
+#### Disable modules
+The following options are availabe to disable the individual linter modules
+
+```
+--disable-reek
+--disable-rubocop
+--disable-rbp
+```
 
 ## Contributing
 
