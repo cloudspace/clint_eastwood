@@ -1,6 +1,7 @@
 require 'clint_eastwood/version'
+require 'rails_best_practices'
 require_relative 'better_reek.rb'
-require 'pry'
+require_relative 'better_rails_best_practices.rb'
 
 # Clint Eastwood
 module ClintEastwood
@@ -60,7 +61,12 @@ module ClintEastwood
     end
 
     def rails_best_practices
-      system 'bundle exec rails_best_practices #{@lint_directory}'
+      options = {}
+      analyzer = RailsBestPractices::Analyzer.new(@base_path)
+      analyzer.analyze
+      analyzer.output
+      analyzer.runner.errors.size == 0
+      #system 'bundle exec rails_best_practices #{@lint_directory}'
     end
   end
 end
