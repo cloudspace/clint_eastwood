@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.email         = ["joey@cloudspace.com"]
   spec.summary       = %q{The Cloudspace ruby linter}
   spec.description   = %q{A simple way to run a series of linting tools with default configurations matching cloudspace's best practices}
-  spec.homepage      = "http://www.cloudspace.com"
+  spec.homepage      = "https://github.com/cloudspace/clint_eastwood"
   spec.license       = "MIT"
 
   spec.files         = `git ls-files -z`.split("\x0")
