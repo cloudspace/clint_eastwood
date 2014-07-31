@@ -10,6 +10,15 @@ module ClintEastwood
   class TheEnforcer
     @result = true
 
+    # Initializes a new Enforce Object with the desired settings
+    #
+    # @param path [String] The base path to lint
+    # @param lint [Array<String>] The desired subdirectories to lint (defaults to ['app', 'lib', 'config', 'spec'])
+    # @param disable_reek [Boolean] If true, this stops reek from running
+    # @param disable_rubocop [Boolean] If true, this stops rubocop from running
+    # @param disable_rbp [Boolean] If true, this stops rails best practices from running
+    #
+    # @returns [TheEnforcer] A new enforcer object
     def initialize(path, lint: nil, disable_reek: false, disable_rubocop: false, disable_rbp: false)
       gem_path = File.expand_path(File.dirname(__FILE__))
       @config_path = File.join(gem_path, '../config')
@@ -22,6 +31,8 @@ module ClintEastwood
       @lint_paths = lint || %w(app lib config spec)
     end
 
+    # Runs each desired linting gem with the appropriate settings
+    # @returns [Boolean] Whether or not the linters were all successfuls
     def enforce
       reek_result = @disable_reek || reek
       rubocop_result = @disable_rubocop || rubocop
@@ -30,6 +41,8 @@ module ClintEastwood
       reek_result && rubocop_result && rbp_result
     end
 
+    private
+
     def locate_config(filename)
       @user_config = File.join(@base_path, 'config', filename)
       @default_config = File.join(@config_path, filename)
@@ -37,6 +50,7 @@ module ClintEastwood
       File.exist?(@user_config) ? @user_config : @default_config
     end
 
+    # Run reek
     def reek
       @reek_config = locate_config('reek.yml')
 
@@ -52,6 +66,7 @@ module ClintEastwood
       Reek::Cli::Application.new(reek_command).execute == 0
     end
 
+    # Run rubocop
     def rubocop
       @rubocop_config = locate_config('rubocop.yml')
 
@@ -60,13 +75,13 @@ module ClintEastwood
       system "bundle exec rubocop --rails --config #{@rubocop_config} #{paths}"
     end
 
+    # Run rails best practices
     def rails_best_practices
       options = {}
       analyzer = RailsBestPractices::Analyzer.new(@base_path)
       analyzer.analyze
       analyzer.output
       analyzer.runner.errors.size == 0
-      #system 'bundle exec rails_best_practices #{@lint_directory}'
     end
   end
 end

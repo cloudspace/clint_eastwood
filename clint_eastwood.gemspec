@@ -8,8 +8,8 @@ Gem::Specification.new do |spec|
   spec.version       = ClintEastwood::VERSION
   spec.authors       = ["Joey Lorich"]
   spec.email         = ["joey@cloudspace.com"]
-  spec.summary       = %q{A cloudspace linting tool}
-  spec.description   = %q{A linting tool specific to cloudspace's best practices}
+  spec.summary       = %q{The Cloudspace ruby linter}
+  spec.description   = %q{A simple way to run a series of linting tools with default configurations matching cloudspace's best practices}
   spec.homepage      = "http://www.cloudspace.com"
   spec.license       = "MIT"
 

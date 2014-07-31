@@ -1,5 +1,6 @@
 require 'thor'
 require 'clint_eastwood'
+
 # Clint Eastwood
 module ClintEastwood
   # Clint Eastwood command line interface
@@ -32,7 +33,9 @@ module ClintEastwood
 
     private
 
-    # Lods and configures clint
+    # Loads and configures clint
+    #
+    # @returns A configured ClintEastwood::TheEnforcer object
     def load_and_configure
       path = options[:path] || File.expand_path('.')
 
