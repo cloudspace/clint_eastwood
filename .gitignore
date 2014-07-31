@@ -26,3 +26,6 @@ NOTES
 
 # Ignore environment variables
 .env
+
+#gem release
+*.gem
