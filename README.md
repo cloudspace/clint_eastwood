@@ -6,7 +6,7 @@ The **C** loudspace **Lint** er for rails applications
 
 Add this line to your application's Gemfile:
 
-    gem 'clint_eastwood', :git => 'git://github.com/cloudspace/clint_eastwood.git'
+    gem 'clint_eastwood'
 
 And then execute:
 
