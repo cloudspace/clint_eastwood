@@ -63,7 +63,7 @@ module ClintEastwood
       reek_command.concat ['--config', "#{@reek_config}"]
 
       # Reek returns the number of errors, so make sure it's zero
-      Reek::Cli::Application.new(reek_command).execute == 0
+      Reek::CLI::Application.new(reek_command).execute == 0
     end
 
     # Run rubocop
