@@ -1,4 +1,7 @@
-EmptyLinesAroundBody:
+EmptyLinesAroundModuleBody:
+  Enabled: false
+
+EmptyLinesAroundClassBody:
   Enabled: false
 
 LineLength:
