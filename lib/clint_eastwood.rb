@@ -1,4 +1,5 @@
 require 'clint_eastwood/version'
+require 'reek'
 require 'rails_best_practices'
 require_relative 'better_rails_best_practices.rb'
 
@@ -18,13 +19,15 @@ module ClintEastwood
     # @param disable_rbp [Boolean] If true, this stops rails best practices from running
     #
     # @returns [TheEnforcer] A new enforcer object
-    def initialize(path, lint: nil, disable_reek: false, disable_rubocop: false, disable_rbp: false)
+    def initialize(path, lint: nil, disable_reek: false, disable_rubocop: false, disable_rbp: false, disable_flog: false, disable_flay: false)
       gem_path = File.expand_path(File.dirname(__FILE__))
       @config_path = File.join(gem_path, '../config')
 
       @disable_rubocop = disable_rubocop
       @disable_reek = disable_reek
       @disable_rbp = disable_rbp
+      @disable_flog = disable_flog
+      @disable_flay = disable_flay
 
       @base_path = path
       @lint_paths = lint || %w(app lib config spec)
@@ -36,8 +39,10 @@ module ClintEastwood
       reek_result = @disable_reek || reek
       rubocop_result = @disable_rubocop || rubocop
       rbp_result = @disable_rbp || rails_best_practices
+      flog_result = @disable_flog || flog
+      flay_result = @disable_flay || flay
 
-      reek_result && rubocop_result && rbp_result
+      reek_result && rubocop_result && rbp_result && flog_result && flay_result
     end
 
     private
@@ -51,18 +56,9 @@ module ClintEastwood
 
     # Run reek
     def reek
-      @reek_config = locate_config('reek.yml')
-
-      reek_command = []
-
-      @lint_paths.each do |path|
-        reek_command << File.join(@base_path, path)
-      end
-
-      reek_command.concat ['--config', "#{@reek_config}"]
-
-      # Reek returns the number of errors, so make sure it's zero
-      Reek::CLI::Application.new(reek_command).execute == 0
+      paths = @lint_paths.map { |p| File.join(@base_path, p) }.join(' ')
+      configuration = locate_config('reek_config.reek')
+      system "bundle exec reek --config #{configuration} #{paths}"
     end
 
     # Run rubocop
@@ -81,6 +77,20 @@ module ClintEastwood
       analyzer.analyze
       analyzer.output
       analyzer.runner.errors.size == 0
+    end
+
+    # Run flog
+    def flog
+      paths = @lint_paths.map { |p| File.join(@base_path, p) }.join(' ')
+
+      system "bundle exec flog #{paths}"
+    end
+
+    # Run flay
+    def flay
+      paths = @lint_paths.map { |p| File.join(@base_path, p) }.join(' ')
+
+      system "bundle exec flay #{paths}"
     end
   end
 end

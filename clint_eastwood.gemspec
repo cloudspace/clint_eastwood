@@ -25,6 +25,8 @@ Gem::Specification.new do |spec|
   spec.add_dependency 'rubocop', '~> 0.42.0'
   spec.add_dependency 'thor', '~> 0.19.1'
   spec.add_dependency 'rails_best_practices', '~> 1.17.0'
+  spec.add_dependency 'flog', '~> 4.4.0'
+  spec.add_dependency 'flay', '~> 2.8.0'
 
   spec.executables = ['clint']
 end

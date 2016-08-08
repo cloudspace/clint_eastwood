@@ -10,6 +10,8 @@ module ClintEastwood
     option 'disable-rbp', type: :boolean
     option 'disable-rubocop', type: :boolean
     option 'disable-reek', type: :boolean
+    option 'disable-flog', type: :boolean
+    option 'disable-flay', type: :boolean
     option 'warn', type: :boolean
 
     default_task :lint
@@ -42,13 +44,17 @@ module ClintEastwood
       disable_rbp = options['disable-rbp'] || false
       disable_rubocop = options['disable-rubocop'] || false
       disable_reek = options['disable-reek'] || false
+      disable_flog = options['disable-flog'] || false
+      disable_flay = options['disable-flay'] || false
 
       ClintEastwood::TheEnforcer.new(
         path,
         lint: options[:lint],
         disable_rbp: disable_rbp,
         disable_rubocop: disable_rubocop,
-        disable_reek: disable_reek
+        disable_reek: disable_reek,
+        disable_flog: disable_flog,
+        disable_flay: disable_flay
       )
     end
   end
