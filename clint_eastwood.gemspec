@@ -18,13 +18,13 @@ Gem::Specification.new do |spec|
   spec.test_files    = spec.files.grep(%r{^(test|spec|features)/})
   spec.require_paths = ["lib"]
 
-  spec.add_development_dependency "bundler", "~> 1.6"
+  spec.add_development_dependency "bundler", "~> 1.12.5"
   spec.add_development_dependency "rake"
 
-  spec.add_dependency 'reek', '~> 2.2.1'
-  spec.add_dependency 'rubocop', '~> 0.32.0'
+  spec.add_dependency 'reek', '~> 4.2.3'
+  spec.add_dependency 'rubocop', '~> 0.42.0'
   spec.add_dependency 'thor', '~> 0.19.1'
-  spec.add_dependency 'rails_best_practices', '~> 1.15.7'
+  spec.add_dependency 'rails_best_practices', '~> 1.17.0'
 
   spec.executables = ['clint']
 end
