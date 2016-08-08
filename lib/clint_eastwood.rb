@@ -1,6 +1,5 @@
 require 'clint_eastwood/version'
 require 'rails_best_practices'
-require_relative 'better_reek.rb'
 require_relative 'better_rails_best_practices.rb'
 
 # Clint Eastwood
